@@ -1,0 +1,235 @@
+/* body {
+  position: relative;
+} */
+a, a:hover, a:active, a:focus {
+  color: #17a2b8;
+  outline: 0;
+}
+.auth-wrapper { height: 100vh; }
+.card-product .add-cart {
+  border: 0;
+  color: #ced4da;
+  position: absolute;
+  top: .5rem;
+  right: 2.75rem;
+  font-size: 0;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  padding: .3rem 0;
+  border-radius: 50%;
+  -webkit-transition: color .2s, opacity .2s, -webkit-box-shadow .2s;
+  transition: color .2s, opacity .2s, -webkit-box-shadow .2s;
+  transition: box-shadow .2s, color .2s, opacity .2s;
+  transition: box-shadow .2s, color .2s, opacity .2s, -webkit-box-shadow .2s;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.card-product .add-cart.active, .card-product .add-cart:hover {
+  color: #dc3545;
+}
+
+.card-product .add-cart:focus {
+  outline: 0;
+}
+
+.card-product .add-cart > i.fa {
+  font-size: 0.875rem;
+}
+.logo{
+  width: 65%;
+}
+.img-product{
+  object-fit: cover;
+  height: 265px;
+}
+.img-list{
+  height: 40px;
+}
+.img-product-list{
+  object-fit: cover;
+  height: auto;
+}
+/*kurir*/
+/* .choseshipping input[type="radio"] {
+  display: none;
+  &:not(:disabled) ~ label {
+    cursor: pointer;
+  }
+  &:disabled ~ label {
+    color: hsla(150, 5%, 75%, 1);
+    border-color: #3a539b;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+} */
+
+.choseshipping input[type="radio"] {
+  display: none;
+}
+
+.choseshipping input[type="radio"]:not(:disabled) ~ label {
+  cursor: pointer;
+}
+
+.choseshipping input[type="radio"]:disabled ~ label {
+  color: hsla(150, 5%, 75%, 1);
+  border-color: #3a539b;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.choseshipping label {
+  max-height: 100px;
+  display: block;
+  background: white;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.choseshipping img {
+  position: relative;
+  width: 55%;
+}
+.choseshipping input[type="radio"]:checked + label {
+  border-color: #3a539b;
+}
+/*radio button */
+
+/* change address checkout */
+.custom-scroll{
+  overflow-y:scroll;
+}
+/* end change address checkout */
+
+.wishlist.active:hover{
+  color: #ced4da;
+}
+/* add address */
+.select2-container--default{
+	flex: 1 1 auto !important;
+  width: 100% !important;
+}
+/* end address */
+
+.loader {
+  margin-left:35%;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  display:none;
+}
+.footer-front{
+  bottom: 0;
+}
+.footer-wrapper {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-support { display: flex; }
+.footer-support div:first-child { margin-right: 15px; }
+.footer-logo { height: 16px; width: auto; }
+.ui-input-text {
+  border: none;
+  border-color: transparent;
+  width: auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/*radio button */
+
+/* background sidebar */
+.sidebar-background {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 150px;
+  z-index: -1;
+  opacity: .035;
+}
+
+.sidebar-background--one {
+  left: auto;
+  right: 0;
+  width: 210px;
+}
+
+.sidebar-background--two {
+  bottom: 18rem;
+  transform: rotate(25deg);
+}
+
+.list-group-item {
+  background: transparent;
+}
+
+.lnr {
+  margin-right: .5rem;
+  vertical-align: -3px;
+  font-size: 1.4rem;
+}
+.page_img{
+  height: 350px;
+}
+.red-link{
+  color: #dc3545;
+}
+.affiliate-link-wrapper{
+  margin-bottom: 30px;
+}
+.pink-link{
+  color: palevioletred;
+  margin-left: 1rem;
+}
+
+@media (max-width: 767px) {
+  .logo {
+    width: 95%;
+  }
+}
+@media (max-width: 575.98px) {
+  .footer-wrapper { justify-content: center; flex-wrap: wrap; }
+  .footer-support { margin-top: 15px; }
+}
+/* Galaxy S3 Portrait */
+@media screen 
+  and (device-width: 320px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 2) 
+  and (orientation: portrait) {
+    .footer-support div:first-child { margin-right: 10px; }
+    .footer-logo { height: 14px; width: auto; }
+}
+/* iPhone 5/SE Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    .footer-support div:first-child { margin-right: 8px; }
+    .footer-logo { height: 12px; width: auto; }
+}
