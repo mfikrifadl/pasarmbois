@@ -56,14 +56,29 @@ class ProductController extends Controller
     public function store(StoreProductPost $request)
     {
         $data = new Product;
-        $data = $request->all();
+        $data = $request->only('pp_title', 'pp_id_category', 'pp_qty', 'pp_id_measurement', 'pp_weight', 'pp_basic_price', 'pp_selling_price', 'pp_description', 'pp_status', 'pp_phone', 'pp_email');
         $data['pp_id_shop'] = 1;
         $data['pp_slug'] = Str::slug($request->pp_title, '-');
         $data['pp_token'] = rand(999999999, 9999999999);
         $data['pp_token_backup'] = rand(999999999, 9999999999);
         Product::create($data);
+
+        $gambar = new ImgProduct;
+        $gambar['pip_token'] = $data['pp_token'];
+        $gambar['pip_token_backup'] = $data['pp_token_backup'];
+        $desc = $data['pp_token'] . '-' . $data['pp_token_backup'];
+        $file = $request->file('pip_img_path');
+        $nama_file = time() . "_" . $file->getClientOriginalName();
+
+        // isi dengan nama folder tempat kemana file diupload
+        $path = 'customAuth/img/product/' . $desc . '/';
+        if (!is_dir('customAuth/img/product/' . $desc)) {
+            mkdir('./customAuth/img/product/' . $desc, 0777, TRUE);
+        }
+        $file->move($path, $nama_file);
+        $gambar['pip_img_path'] = 'img/product/' . $desc . '/' . $nama_file;
+        $gambar->save();
         return redirect()->route('product.product.index');
-        // return response()->json(['message' => 'Succes Add!']);
     }
 
     /**
@@ -105,6 +120,23 @@ class ProductController extends Controller
     {
         $data = $request->only('pp_title', 'pp_basic_price', 'pp_selling_price', 'pp_qty', 'pp_weight', 'pp_description', 'pp_status', 'pp_email', 'pp_phone');
         $product->update($data);
+        if (isset($request->pp_link)) {
+            $gambar = new ImgProduct;
+            $gambar['pip_token'] = $product['pp_token'];
+            $gambar['pip_token_backup'] = $product['pp_token_backup'];
+            $desc = $product['pp_token'] . '-' . $product['pp_token_backup'];
+            $file = $request->file('pp_link');
+            $nama_file = time() . "_" . $file->getClientOriginalName();
+
+            // isi dengan nama folder tempat kemana file diupload
+            $path = 'customAuth/img/product/' . $desc . '/';
+            if (!is_dir('customAuth/img/product/' . $desc)) {
+                mkdir('./customAuth/img/product/' . $desc, 0777, TRUE);
+            }
+            $file->move($path, $nama_file);
+            $gambar['pip_img_path'] = 'img/product/' . $desc . '/' . $nama_file;
+            $gambar->save();
+        }
         return redirect()->route('product.product.index')->with(['message' => 'Success Edit Product']);
     }
 

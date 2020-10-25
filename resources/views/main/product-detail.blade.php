@@ -71,7 +71,7 @@
 <div class="row mt-4">
     <div class="col">
         <h3>Deskripsi</h3>
-        <p>{{$product->pp_description}}</p>
+        {!!$product->pp_description!!}
         <hr>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item">

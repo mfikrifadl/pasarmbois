@@ -47,12 +47,18 @@ class PesanMasukController extends Controller
      */
     public function store(StorePesanMasukPost $request)
     {
+        // dd($request);
         $data = new Contact;
         $data = $request->only(['pc_content', 'pc_parent', 'pc_email']);
         $data['pc_created_at'] = date("Y-m-d h:i:s");
         $data['pc_id_user'] = Auth::user()->pu_id;
         Contact::create($data);
-        return redirect()->route('pesanmasuk.detail', $request['pc_parent']);
+        $details = [
+            'title' => 'Hai ' . $request->pc_name . ' ini balasan pesanmu',
+            'body' => $request->pc_content
+        ];
+        \Mail::to($request->pc_email)->send(new \App\Mail\EmailContact($details));
+        return redirect()->back();
     }
 
     /**

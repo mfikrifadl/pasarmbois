@@ -6,19 +6,19 @@
 <div class="container-fluid" data-codepage="{{$code_page}}">
     @if(session()->has('message'))
     <div class="alert alert-primary" role="alert">
-        {{$message}}
+        {{ session()->get('message') }}
     </div>
     @endif
     @if ($code_page == "addproduct")
     @if(session()->has('message'))
     <div class="alert alert-primary" role="alert">
-        {{$message}}
+        {{ session()->get('message') }}
     </div>
     @endif
     @elseif ($code_page == "editProduct")
     @if (!empty($_SESSION['success_msg_edit']))
     <div class="alert alert-primary" role="alert">
-        {{$message}}
+        {{ session()->get('message') }}
     </div>
     @endif
     @endif
@@ -26,7 +26,7 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <!-- Column rendering -->
-    <form id="update_product" method="POST" action="{{route('product.update', $product)}}">
+    <form id="update_product" method="POST" action="{{route('product.update', $product)}}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -224,7 +224,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="productpicture" class="control-label col-form-label">Upload Gambar<span class="text-danger">*</span></label>
-                                    <input type="file" id="input-file-disable-remove" name="pp_link" class="dropify" data-show-remove="false" data-default-file="{{asset('customAuth/'.$product->pp_link)}}" required></input>
+                                    <input type="file" id="input-file-disable-remove" name="pp_link" class="dropify" data-show-remove="false" data-default-file="{{asset('customAuth/'.$product->pp_link)}}"></input>
                                 </div>
                             </div>
                         </div>
@@ -242,24 +242,51 @@
 
         </div><!-- end row -->
     </form>
-    @endsection
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="productpicture" class="control-label col-form-label">Galeri</label> <br />
+                                @foreach ($product->images as $i)
+                                <div class="thumb-wrapper">
+                                    <img class="img img-gallery" src="{{asset('customAuth/'.$i->pip_img_path)}}" alt="{{$product->pp_title}}">
+                                    <form action="{{route('product.img.delete', $i)}}" method="POST" class="d-inline-block">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        <button type="submit" class="btn btn-danger btn-circle del-img-gallery">
+                                            <i class="mdi mdi-delete-forever"></i> </button>
+                                    </form>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
 
-    @push('custom-script')
-    <!-- text area -->
-    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.ckeditor').ckeditor();
-        });
-    </script>
+@push('custom-script')
+<!-- text area -->
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.ckeditor').ckeditor();
+    });
+</script>
 
-    <!-- dropify -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous"></script>
-    <script>
-        //Dropify (image preview)
-        $(document).ready(function() {
-            $('.dropify').dropify();
-        })
-    </script>
-    @endpush
+<!-- dropify -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous"></script>
+<script>
+    //Dropify (image preview)
+    $(document).ready(function() {
+        $('.dropify').dropify();
+    })
+</script>
+@endpush

@@ -88,8 +88,8 @@
 @push('custom-script')
 <!-- data table -->
 <script type="text/javascript">
-	$(document).ready(function(){
-		$('.data').DataTable();
-	});
+    $(document).ready(function() {
+        $('.data').DataTable();
+    });
 </script>
 @endpush

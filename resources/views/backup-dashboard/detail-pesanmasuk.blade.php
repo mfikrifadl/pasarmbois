@@ -26,7 +26,7 @@
                                     <div class="media-body ml-3">
                                         <h5>{{$r->pud_firstname}} {{$r->pud_lastname}}</h5>
                                         <small class="ml-2">{{tgl_indo($r->pc_created_at) . " " . substr($r->pc_created_at, 10, 6)}}</small>
-                                        <p>{{$r->pc_content}}</p>
+                                        {!!$r->pc_content!!}
                                     </div>
                                 </div>
                             </div>
